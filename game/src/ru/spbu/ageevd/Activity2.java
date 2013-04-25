@@ -45,7 +45,7 @@ public class Activity2 extends Activity {
 					CharSequence text;
 					EditText password = (EditText) findViewById(R.id.password);
 					EditText login = (EditText) findViewById(R.id.login);
-					if (db.isUserExist(login.getText().toString())) {
+					if (!db.isUserExist(login.getText().toString())) {
 						db.createUser(login.getText().toString(), password
 								.getText().toString());
 						id = db.getAllUsers();
@@ -56,8 +56,6 @@ public class Activity2 extends Activity {
 						text = "The user '" + login.getText()
 								+ " is already exist";
 					}
-
-					
 
 					Context context = getApplicationContext();
 					int duration = Toast.LENGTH_LONG;

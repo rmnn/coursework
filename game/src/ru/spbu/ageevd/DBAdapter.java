@@ -74,11 +74,10 @@ public class DBAdapter {
 	}
 
 	public boolean isUserExist(String userName) {
-		Cursor cursor = database
-			.rawQuery("SELECT password FROM users WHERE login="
-					+ userName, null);
-		return cursor.getColumnCount() != 0? true : false ;
-		
+		Cursor cursor = database.rawQuery(
+				"SELECT * FROM users WHERE TRIM(login) = '" + userName.trim()
+						+ "'", null);
+		return cursor.moveToFirst();
 	}
 
 	public int getAllUsers() {
