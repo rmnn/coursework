@@ -1,4 +1,5 @@
 coursework
 ==========
 
-course-work
+
+This is game for course work
