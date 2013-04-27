@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class DBAdapter {
 
-	// поля базы данных
 	public static final String KEY_ROWID = "_id";
 	public static final String KEY_USER = "login";
 	public static final String KEY_PASSWORD = "password";
@@ -31,10 +30,6 @@ public class DBAdapter {
 		dbHelper.close();
 	}
 
-	/**
-	 * создать новый элемент списка дел. если создан успешно - возвращается
-	 * номер строки rowId иначе -1
-	 */
 	public long createUser(String userName, String userPassword) {
 		ContentValues initialValues = createContentValues(userName,
 				userPassword);
@@ -42,19 +37,11 @@ public class DBAdapter {
 		return database.insert(DATABASE_TABLE, null, initialValues);
 	}
 
-	/**
-	 * возвращает курсор со всеми элементами списка дел
-	 * 
-	 * @return курсор с результатами всех записей
-	 */
 	public Cursor fetchAllUsers() {
 		return database.query(DATABASE_TABLE, new String[] { KEY_ROWID,
 				KEY_USER, KEY_PASSWORD }, null, null, null, null, null);
 	}
 
-	/**
-	 * возвращает курсор, спозиционированный на указанной записи
-	 */
 	public Cursor fetchUser(long rowId) throws SQLException {
 		Cursor mCursor = database.query(true, DATABASE_TABLE, new String[] {
 				KEY_ROWID, KEY_USER, KEY_PASSWORD }, KEY_ROWID + "=" + rowId,
@@ -73,11 +60,21 @@ public class DBAdapter {
 		return values;
 	}
 
-	public boolean isUserExist(String userName) {
+	public Cursor isUserExist(String userName) {
 		Cursor cursor = database.rawQuery(
 				"SELECT * FROM users WHERE TRIM(login) = '" + userName.trim()
 						+ "'", null);
-		return cursor.moveToFirst();
+		return cursor;
+	}
+
+	public boolean isPasswordCorrect(String userName, String userPassword) {
+		Cursor cursor = isUserExist(userName);
+		if (cursor.moveToFirst()) {
+			if (cursor.getString(2).equals(userPassword)) {
+  	     		return true;				
+			}
+		}
+        return false;
 	}
 
 	public int getAllUsers() {

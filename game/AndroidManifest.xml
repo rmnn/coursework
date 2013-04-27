@@ -35,6 +35,10 @@
             android:name="ru.spbu.ageevd.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name="ru.spbu.ageevd.MenuActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
     </application>
 
 </manifest>

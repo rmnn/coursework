@@ -12,7 +12,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 	private static final int DATABASE_VERSION = 1;
 
-	// запрос на создание базы данных
 	private static final String DATABASE_CREATE = "create table users (_id integer primary key autoincrement, "
 			+ "login text not null, password text not null);";
 
@@ -20,13 +19,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
-	// метод вызывается при создании базы данных
 	@Override
 	public void onCreate(SQLiteDatabase database) {
 		database.execSQL(DATABASE_CREATE);
 	}
 
-	// метод вызывается при обновлении базы данных, например, когда вы увеличиваете номер версии базы данных
 	@Override
 	public void onUpgrade(SQLiteDatabase database, int oldVersion,
 			int newVersion) {

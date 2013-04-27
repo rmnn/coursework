@@ -45,7 +45,7 @@ public class Activity2 extends Activity {
 					CharSequence text;
 					EditText password = (EditText) findViewById(R.id.password);
 					EditText login = (EditText) findViewById(R.id.login);
-					if (!db.isUserExist(login.getText().toString())) {
+					if (!db.isUserExist(login.getText().toString()).moveToFirst()) {
 						db.createUser(login.getText().toString(), password
 								.getText().toString());
 						id = db.getAllUsers();

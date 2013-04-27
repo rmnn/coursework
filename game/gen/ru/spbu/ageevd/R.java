@@ -30,11 +30,12 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_cat1=0x7f0a000c;
-        public static final int action_cat2=0x7f0a000d;
-        public static final int action_cat3=0x7f0a000e;
-        public static final int action_forgot_password=0x7f0a000b;
-        public static final int action_settings=0x7f0a000a;
+        public static final int action_cat1=0x7f0a000d;
+        public static final int action_cat2=0x7f0a000e;
+        public static final int action_cat3=0x7f0a000f;
+        public static final int action_forgot_password=0x7f0a000c;
+        public static final int action_settings=0x7f0a000b;
+        public static final int count=0x7f0a000a;
         public static final int email=0x7f0a0007;
         public static final int fullscreen=0x7f0a0009;
         public static final int genRan=0x7f0a0003;
@@ -50,6 +51,7 @@ public final class R {
         public static final int activity_activity2=0x7f030000;
         public static final int activity_login=0x7f030001;
         public static final int activity_main=0x7f030002;
+        public static final int activity_menu=0x7f030003;
     }
     public static final class menu {
         public static final int activity2=0x7f090000;
@@ -66,6 +68,7 @@ public final class R {
         public static final int action_sign_in_register=0x7f06000e;
         public static final int action_sign_in_short=0x7f06000f;
         public static final int app_name=0x7f060000;
+        public static final int error_field_incorrect=0x7f060016;
         public static final int error_field_required=0x7f060015;
         public static final int error_incorrect_password=0x7f060014;
         public static final int error_invalid_email=0x7f060012;
@@ -74,27 +77,27 @@ public final class R {
         public static final int hello_world=0x7f060002;
         public static final int login_progress_signing_in=0x7f060011;
         public static final int next=0x7f060006;
-        public static final int pref_default_display_name=0x7f06001b;
-        public static final int pref_description_social_recommendations=0x7f060019;
+        public static final int pref_default_display_name=0x7f06001c;
+        public static final int pref_description_social_recommendations=0x7f06001a;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f06001d;
+        public static final int pref_header_data_sync=0x7f06001e;
         /**  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f060017;
+        public static final int pref_header_general=0x7f060018;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f060020;
-        public static final int pref_ringtone_silent=0x7f060023;
-        public static final int pref_title_add_friends_to_messages=0x7f06001c;
-        public static final int pref_title_display_name=0x7f06001a;
-        public static final int pref_title_new_message_notifications=0x7f060021;
-        public static final int pref_title_ringtone=0x7f060022;
-        public static final int pref_title_social_recommendations=0x7f060018;
-        public static final int pref_title_sync_frequency=0x7f06001e;
-        public static final int pref_title_system_sync_settings=0x7f06001f;
-        public static final int pref_title_vibrate=0x7f060024;
+        public static final int pref_header_notifications=0x7f060021;
+        public static final int pref_ringtone_silent=0x7f060024;
+        public static final int pref_title_add_friends_to_messages=0x7f06001d;
+        public static final int pref_title_display_name=0x7f06001b;
+        public static final int pref_title_new_message_notifications=0x7f060022;
+        public static final int pref_title_ringtone=0x7f060023;
+        public static final int pref_title_social_recommendations=0x7f060019;
+        public static final int pref_title_sync_frequency=0x7f06001f;
+        public static final int pref_title_system_sync_settings=0x7f060020;
+        public static final int pref_title_vibrate=0x7f060025;
         public static final int press=0x7f060009;
         /**  Strings related to login 
          */
@@ -102,7 +105,7 @@ public final class R {
         public static final int prompt_password=0x7f06000d;
         public static final int title_activity_activity2=0x7f060007;
         public static final int title_activity_login=0x7f06000b;
-        public static final int title_activity_settings=0x7f060016;
+        public static final int title_activity_settings=0x7f060017;
     }
     public static final class style {
         /** 

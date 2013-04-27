@@ -1,15 +1,16 @@
 package ru.spbu.ageevd;
 
-
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -24,17 +25,15 @@ import android.widget.TextView;
  * well.
  */
 public class LoginActivity extends Activity {
-	/**
-	 * A dummy authentication store containing known user names and passwords.
-	 * TODO: remove after connecting to a real authentication system.
-	 */
-	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"foo@example.com:hello", "bar@example.com:world" };
 
 	/**
 	 * The default email to populate the email field with.
 	 */
 	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
+
+	private static final String TAG = "myLOGS";
+
+	private static boolean isPasswordCorrect = true;
 
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
@@ -44,6 +43,7 @@ public class LoginActivity extends Activity {
 	// Values for email and password at the time of the login attempt.
 	private String mEmail;
 	private String mPassword;
+	DBAdapter db = new DBAdapter(this);
 
 	// UI references.
 	private EditText mEmailView;
@@ -56,10 +56,11 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.activity_login);
+		Log.d(TAG, "START ACTIVITY LOGIN");
 
 		// Set up the login form.
 		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
@@ -130,6 +131,16 @@ public class LoginActivity extends Activity {
 			mPasswordView.setError(getString(R.string.error_invalid_password));
 			focusView = mPasswordView;
 			cancel = true;
+		} else {
+			db.open();
+			if (db.isUserExist(mEmail).moveToFirst()) {
+				if (!db.isPasswordCorrect(mEmail, mPassword)) {
+					mPasswordView
+							.setError(getString(R.string.error_field_incorrect));
+					focusView = mPasswordView;
+					cancel = true;
+				}
+			}
 		}
 
 		// Check for a valid email address.
@@ -203,26 +214,31 @@ public class LoginActivity extends Activity {
 	 * the user.
 	 */
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
-
+			db.open();
 			try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				return false;
-			}
-
-			for (String credential : DUMMY_CREDENTIALS) {
-				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mEmail)) {
-					// Account exists, return true if the password matches.
-					return pieces[1].equals(mPassword);
+				Log.d(TAG, mEmail);
+				Log.d(TAG, mPassword);
+				Cursor cursor = db.isUserExist(mEmail);
+				if (!cursor.moveToFirst()) {
+					Log.d(TAG, "CREATING NEW USER");
+					db.createUser(mEmail, mPassword);
+					startActivity(new Intent(LoginActivity.this,
+							MenuActivity.class));
+				} else {
+					Log.d(TAG, "USER EXIST");
+					if (cursor.getString(2).equals(mPassword)) {
+						Log.d(TAG, "PASSWORD IS CORRECT");
+						startActivity(new Intent(LoginActivity.this,
+								MenuActivity.class));
+					}
 				}
+			} catch (Exception ex) {
+			} finally {
+				db.close();
 			}
-
-			// TODO: register the new account here.
 			return true;
 		}
 

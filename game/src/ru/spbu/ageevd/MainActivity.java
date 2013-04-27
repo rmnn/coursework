@@ -11,8 +11,10 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
+	DBAdapter db = new DBAdapter(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,7 @@ public class MainActivity extends Activity {
 		findViewById(R.id.fullscreen).setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View arg0, MotionEvent arg1) {
-				startActivity(new Intent(MainActivity.this, Activity2.class));
+				startActivity(new Intent(MainActivity.this, LoginActivity.class));
 				return false;
 			}
 		});
