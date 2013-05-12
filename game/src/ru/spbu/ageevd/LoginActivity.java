@@ -225,14 +225,16 @@ public class LoginActivity extends Activity {
 				if (!cursor.moveToFirst()) {
 					Log.d(TAG, "CREATING NEW USER");
 					db.createUser(mEmail, mPassword);
-					startActivity(new Intent(LoginActivity.this,
-							MenuActivity.class));
+					Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+					intent.putExtra("KEY_USER", mEmail);
+					startActivity(intent);
 				} else {
 					Log.d(TAG, "USER EXIST");
 					if (cursor.getString(2).equals(mPassword)) {
 						Log.d(TAG, "PASSWORD IS CORRECT");
-						startActivity(new Intent(LoginActivity.this,
-								MenuActivity.class));
+						Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+						intent.putExtra("KEY_USER", mEmail);
+						startActivity(intent);
 					}
 				}
 			} catch (Exception ex) {

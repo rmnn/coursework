@@ -11,6 +11,7 @@ public class DBAdapter {
 	public static final String KEY_ROWID = "_id";
 	public static final String KEY_USER = "login";
 	public static final String KEY_PASSWORD = "password";
+	public static final String KEY_USER_RATING = "rating";
 	private static final String DATABASE_TABLE = "users";
 	private Context context;
 	private SQLiteDatabase database;
@@ -32,31 +33,55 @@ public class DBAdapter {
 
 	public long createUser(String userName, String userPassword) {
 		ContentValues initialValues = createContentValues(userName,
-				userPassword);
+				userPassword, 0);
 
 		return database.insert(DATABASE_TABLE, null, initialValues);
 	}
 
 	public Cursor fetchAllUsers() {
 		return database.query(DATABASE_TABLE, new String[] { KEY_ROWID,
-				KEY_USER, KEY_PASSWORD }, null, null, null, null, null);
+				KEY_USER, KEY_PASSWORD, KEY_USER_RATING }, null, null, null,
+				null, null);
 	}
 
 	public Cursor fetchUser(long rowId) throws SQLException {
 		Cursor mCursor = database.query(true, DATABASE_TABLE, new String[] {
-				KEY_ROWID, KEY_USER, KEY_PASSWORD }, KEY_ROWID + "=" + rowId,
-				null, null, null, null, null);
+				KEY_ROWID, KEY_USER, KEY_PASSWORD, KEY_USER_RATING }, KEY_ROWID
+				+ "=" + rowId, null, null, null, null, null);
 		if (mCursor != null) {
 			mCursor.moveToFirst();
 		}
 		return mCursor;
 	}
 
+	public int getUserRating(String userName) {
+		Cursor cursor = database.rawQuery(
+				"SELECT rating FROM users WHERE TRIM(login) = '"
+						+ userName.trim() + "'", null);
+		if (cursor.moveToFirst()) {
+			return cursor.getInt(0);
+		}
+		return 0;
+	}
+
+	public boolean updateUserRating(String userName, int rating) {
+		ContentValues updateValues = createContentValue(rating);
+		return database.update(DATABASE_TABLE, updateValues, KEY_USER + "="
+				+ userName, null) > 0;
+	}
+
 	private ContentValues createContentValues(String userName,
-			String userPassword) {
+			String userPassword, int rating) {
 		ContentValues values = new ContentValues();
 		values.put(KEY_USER, userName);
 		values.put(KEY_PASSWORD, userPassword);
+		values.put(KEY_USER_RATING, rating);
+		return values;
+	}
+
+	private ContentValues createContentValue(int rating) {
+		ContentValues values = new ContentValues();
+		values.put(KEY_USER_RATING, rating);
 		return values;
 	}
 
@@ -71,10 +96,10 @@ public class DBAdapter {
 		Cursor cursor = isUserExist(userName);
 		if (cursor.moveToFirst()) {
 			if (cursor.getString(2).equals(userPassword)) {
-  	     		return true;				
+				return true;
 			}
 		}
-        return false;
+		return false;
 	}
 
 	public int getAllUsers() {
@@ -85,5 +110,9 @@ public class DBAdapter {
 		}
 		return cursor.getInt(0);
 
+	}
+	
+	public void updateBD() {
+		dbHelper.onUpgrade(database, 1, 2);
 	}
 }

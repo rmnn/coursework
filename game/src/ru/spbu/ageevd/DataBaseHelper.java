@@ -13,7 +13,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 
 	private static final String DATABASE_CREATE = "create table users (_id integer primary key autoincrement, "
-			+ "login text not null, password text not null);";
+			+ "login text not null, password text not null, rating integer not null);";
 
 	public DataBaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -30,7 +30,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 		Log.w(DataBaseHelper.class.getName(),
 				"Upgrading database from version " + oldVersion + " to "
 						+ newVersion + ", which will destroy all old data");
-		database.execSQL("DROP TABLE IF EXISTS todo");
+		database.execSQL("DROP TABLE IF EXISTS users");
 		onCreate(database);
 	}
 }

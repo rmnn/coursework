@@ -5,6 +5,7 @@ import ru.spbu.ageevd.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,7 +15,6 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-	DBAdapter db = new DBAdapter(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
 			@Override
 			public boolean onTouch(View arg0, MotionEvent arg1) {
 				startActivity(new Intent(MainActivity.this, LoginActivity.class));
+				Log.d("ASD", "ASD");
 				return false;
 			}
 		});

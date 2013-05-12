@@ -4,28 +4,59 @@
     android:layout_height="fill_parent"
     android:background="@drawable/menubackground" >
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_margin="10dp"
+        android:layout_margin="41dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/start"
-            style="@style/MenuFont"
-            android:layout_gravity="right"
-            android:text="start" />
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo2" />
+
+        <Button
+            android:id="@+id/button1"
+            android:textColor="#2faefe"
+            android:layout_marginTop="180dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="New game"
+             > </Button>
+        
+        <Button
+            android:id="@+id/button2"
+            android:textColor="#2faefe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="About"
+             > </Button>
+        
+        <Button
+            android:id="@+id/button3"
+            android:textColor="#2faefe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Exit"
+             > </Button>
 
         <TextView
-            android:id="@+id/about"
-            style="@style/MenuFont"
-            android:text="about" />
+            android:id="@+id/rating"
+            android:textColor="#2faefe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:gravity="end"
+             />
+        
 
-        <TextView
-            android:id="@+id/exit"
-            style="@style/MenuFont"
-            android:text="exit" />
+    </TableLayout>
 
-    </LinearLayout>
-
+    
+ 
 </RelativeLayout>

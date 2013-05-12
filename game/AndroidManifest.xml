@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.spbu.ageevd"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0"
+    android:installLocation="preferExternal" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -38,6 +39,14 @@
         <activity
             android:name="ru.spbu.ageevd.MenuActivity"
             android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name="ru.spbu.ageevd.GameActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name="ru.spbu.ageevd.ResultActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 
