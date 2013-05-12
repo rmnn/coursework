@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class DBAdapter {
 
@@ -63,11 +64,29 @@ public class DBAdapter {
 		}
 		return 0;
 	}
+	
+	public int getRowId(String userName) {
+		Cursor cursor = database.rawQuery(
+				"SELECT _id FROM users WHERE TRIM(login) = '"
+						+ userName.trim() + "'", null);
+		if (cursor.moveToFirst()) {
+			return cursor.getInt(0);
+		}
+		return 0;
+	}
 
 	public boolean updateUserRating(String userName, int rating) {
 		ContentValues updateValues = createContentValue(rating);
-		return database.update(DATABASE_TABLE, updateValues, KEY_USER + "="
-				+ userName, null) > 0;
+		Log.d("ASD", "SQL RABOTAET " + userName + "   " + Integer.toString(rating));
+		if (rating > getUserRating(userName)) {
+			Log.d("ASD", "ZASHLI SUDA");
+			database.update(DATABASE_TABLE, updateValues, KEY_ROWID + "="
+					+ Integer.toString(getRowId(userName)), null);
+			Log.d("ASD", "TUT NE DOLJNY BIT");
+			return true;
+					
+		}
+		return false;
 	}
 
 	private ContentValues createContentValues(String userName,
@@ -111,7 +130,7 @@ public class DBAdapter {
 		return cursor.getInt(0);
 
 	}
-	
+
 	public void updateBD() {
 		dbHelper.onUpgrade(database, 1, 2);
 	}

@@ -6,14 +6,37 @@
     android:background="@drawable/menubackground" >
 
    <TextView
-        android:id="@+id/result"
+       android:id="@+id/result2"
        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:gravity="top|center"
-        android:keepScreenOn="true"
-        android:layout_marginTop="20dp"
-        android:textColor="#2faefe"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+       android:layout_height="50dp"
+       android:layout_above="@+id/imageView1"
+       android:layout_alignParentLeft="true"
+       android:layout_marginBottom="44dp"
+       android:gravity="top|center"
+       android:keepScreenOn="true"
+       android:textColor="#2faefe"
+       android:textSize="21sp"
+       android:textStyle="bold" />
+
+   <TextView
+       android:id="@+id/result"
+       android:layout_width="fill_parent"
+       android:layout_height="63dp"
+       android:layout_above="@+id/result2"
+       android:layout_alignParentLeft="true"
+       android:gravity="top|center"
+       android:keepScreenOn="true"
+       android:textColor="#2faefe"
+       android:textSize="21sp"
+       android:textStyle="bold" />
+
+   <ImageView
+       android:id="@+id/imageView1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:layout_centerHorizontal="true"
+       android:layout_marginBottom="60dp"
+       android:src="@drawable/chart" />
 
 </RelativeLayout>

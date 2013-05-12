@@ -23,15 +23,17 @@ public class MenuActivity extends Activity {
 		DBAdapter db = new DBAdapter(this);
 		db.open();
 		TextView rat = (TextView) findViewById(R.id.rating);
-		String user = getIntent().getExtras().getString("KEY_USER");
-		CharSequence text = "Your rating, " + user + " :"
+		final String user = getIntent().getExtras().getString("KEY_USER");
+		CharSequence text = "Your rating : "
 				+ Integer.toString(db.getUserRating(user));
 		rat.setText(text);
 		Button newGameButton = (Button) findViewById(R.id.button1);
 		newGameButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(MenuActivity.this, GameActivity.class));
+				Intent intent = new Intent(MenuActivity.this, GameActivity.class);
+				intent.putExtra("KEY_USER", user);
+				startActivity(intent);
 			}
 		});
 		Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();

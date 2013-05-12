@@ -36,13 +36,12 @@ public class GameActivity extends Activity {
 	private static String result;
 	private static int answer;
 	private static int numberOfRound;
-	private static int trueAnswers;
+	private static int trueAnswers = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		numberOfRound = 0;
-		trueAnswers = 0;
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -56,48 +55,49 @@ public class GameActivity extends Activity {
 		rdButton0 = (RadioButton) findViewById(R.id.radio0);
 		view = (ImageView) findViewById(R.id.image);
 		Log.d("ASD", "TUT ESHE OK");
-	    button = (Button) findViewById(R.id.buttonnext);
-	    Log.d("ASD", "TUT ESHE OK");
-	    getNextRound();
-	    
+		button = (Button) findViewById(R.id.buttonnext);
+		Log.d("ASD", "TUT ESHE OK");
+		getNextRound();
+
 		mHandler = new Handler() {
 			public void handleMessage(android.os.Message msg) {
 				answer = gamePlay.getAnswer();
 				if (id == answer) {
-					result = "Верно";
+					result = "Correct";
 					trueAnswers++;
 				} else {
-					result = "Неверно";
+					result = "Incorrect";
 				}
-				Log.d("ASD", "gameplayh: " + Integer.toString(answer) + ", button : " + Integer.toString(id));
+				Log.d("ASD", "gameplayh: " + Integer.toString(answer)
+						+ ", button : " + Integer.toString(id));
 				Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
 				if (numberOfRound == 5) {
-					Intent intent = new Intent(GameActivity.this, ResultActivity.class);
-					intent.putExtra("KEY_RESULT", Integer.toString(trueAnswers));
+					Intent intent = new Intent(GameActivity.this,
+							ResultActivity.class);
+					intent.putExtra("KEY_RESULT", trueAnswers);
+				    intent.putExtra("KEY_USER", getIntent().getExtras().getString("KEY_USER"));
 					startActivity(intent);
 				}
-				getNextRound();								
+				getNextRound();
 			};
 		};
-	
-		button.setOnClickListener(new OnClickListener() {		
+
+		button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				id = (rdGroup.getCheckedRadioButtonId()) % 10;
 				numberOfRound++;
 				Thread t = new Thread(new Runnable() {
-			        public void run() {			          			      
-			            mHandler.sendEmptyMessage(id);		            
-			        }
-			      });
-			      t.start();
-				
+					public void run() {
+						mHandler.sendEmptyMessage(id);
+					}
+				});
+				t.start();
 			}
 		});
 
-			
 	}
-	
+
 	private void getNextRound() {
 		gamePlay.generateNextRound();
 		view.setImageBitmap(BitmapFactory.decodeResource(this.getResources(),
@@ -113,5 +113,4 @@ public class GameActivity extends Activity {
 		ch = variants[3];
 		rdButton3.setText(ch);
 	}
-
 }
