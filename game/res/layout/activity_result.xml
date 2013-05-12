@@ -39,4 +39,13 @@
        android:layout_marginBottom="60dp"
        android:src="@drawable/chart" />
 
+   <Button
+       android:id="@+id/backbutton"
+       style="?android:attr/buttonStyleSmall"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:layout_alignParentRight="true"
+       android:text="Back to menu" />
+
 </RelativeLayout>

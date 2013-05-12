@@ -9,7 +9,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MenuActivity extends Activity {
 
@@ -36,7 +35,14 @@ public class MenuActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
+		Button ratingButton = (Button) findViewById(R.id.button0);
+		ratingButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MenuActivity.this, ShowRatingActivity.class);
+				startActivity(intent);
+			}
+		});
 
 	}
 }

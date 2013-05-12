@@ -121,13 +121,10 @@ public class DBAdapter {
 		return false;
 	}
 
-	public int getAllUsers() {
-		Cursor cursor = database.rawQuery("SELECT COUNT(login) FROM users",
+	public Cursor getTopUsers() {
+		return database.rawQuery("SELECT * FROM users;",
 				null);
-		if (cursor.moveToFirst()) {
-			return cursor.getInt(0);
-		}
-		return cursor.getInt(0);
+		
 
 	}
 

@@ -1,11 +1,15 @@
 package ru.spbu.ageevd;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.View.OnClickListener;
 
 public class ResultActivity extends Activity {
 	@Override
@@ -28,6 +32,18 @@ public class ResultActivity extends Activity {
 		if (db.updateUserRating(user, result)) {
 			Toast.makeText(this, "Rating updated", Toast.LENGTH_SHORT).show();
 		}
+		db.close();
+		Button button = (Button) findViewById(R.id.backbutton);
+		button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(ResultActivity.this, MenuActivity.class);
+				intent.putExtra("KEY_USER", user);
+				startActivity(intent);
+				
+			}
+		});
 		
 	}
 

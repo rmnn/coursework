@@ -48,6 +48,10 @@
             android:name="ru.spbu.ageevd.ResultActivity"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name="ru.spbu.ageevd.ShowRatingActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>

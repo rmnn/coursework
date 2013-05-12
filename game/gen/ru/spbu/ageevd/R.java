@@ -40,14 +40,16 @@ public final class R {
         public static final int venus=0x7f02000a;
     }
     public static final class id {
-        public static final int action_cat1=0x7f0a001c;
-        public static final int action_cat2=0x7f0a001d;
-        public static final int action_cat3=0x7f0a001e;
-        public static final int action_forgot_password=0x7f0a001b;
-        public static final int action_settings=0x7f0a001a;
+        public static final int action_cat1=0x7f0a001f;
+        public static final int action_cat2=0x7f0a0020;
+        public static final int action_cat3=0x7f0a0021;
+        public static final int action_forgot_password=0x7f0a001e;
+        public static final int action_settings=0x7f0a001d;
+        public static final int backbutton=0x7f0a001c;
+        public static final int button0=0x7f0a0015;
         public static final int button1=0x7f0a0014;
-        public static final int button2=0x7f0a0015;
-        public static final int button3=0x7f0a0016;
+        public static final int button2=0x7f0a0016;
+        public static final int button3=0x7f0a0017;
         public static final int buttonnext=0x7f0a0007;
         public static final int checkbox=0x7f0a0011;
         public static final int email=0x7f0a000f;
@@ -56,6 +58,7 @@ public final class R {
         public static final int go=0x7f0a0002;
         public static final int image=0x7f0a0005;
         public static final int imageView1=0x7f0a0013;
+        public static final int listView1=0x7f0a0019;
         public static final int login=0x7f0a0000;
         public static final int login_form=0x7f0a000e;
         public static final int login_status=0x7f0a000c;
@@ -66,9 +69,9 @@ public final class R {
         public static final int radio2=0x7f0a000a;
         public static final int radio3=0x7f0a000b;
         public static final int radioGroup1=0x7f0a0006;
-        public static final int rating=0x7f0a0017;
-        public static final int result=0x7f0a0019;
-        public static final int result2=0x7f0a0018;
+        public static final int rating=0x7f0a0018;
+        public static final int result=0x7f0a001b;
+        public static final int result2=0x7f0a001a;
         public static final int sign_in_button=0x7f0a0010;
         public static final int widget43=0x7f0a0004;
     }
@@ -78,7 +81,8 @@ public final class R {
         public static final int activity_login=0x7f030002;
         public static final int activity_main=0x7f030003;
         public static final int activity_menu=0x7f030004;
-        public static final int activity_result=0x7f030005;
+        public static final int activity_ratings=0x7f030005;
+        public static final int activity_result=0x7f030006;
     }
     public static final class menu {
         public static final int activity2=0x7f090000;

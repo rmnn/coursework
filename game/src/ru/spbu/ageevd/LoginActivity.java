@@ -33,8 +33,6 @@ public class LoginActivity extends Activity {
 
 	private static final String TAG = "myLOGS";
 
-	private static boolean isPasswordCorrect = true;
-
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
 	 */
@@ -225,14 +223,16 @@ public class LoginActivity extends Activity {
 				if (!cursor.moveToFirst()) {
 					Log.d(TAG, "CREATING NEW USER");
 					db.createUser(mEmail, mPassword);
-					Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+					Intent intent = new Intent(LoginActivity.this,
+							MenuActivity.class);
 					intent.putExtra("KEY_USER", mEmail);
 					startActivity(intent);
 				} else {
 					Log.d(TAG, "USER EXIST");
 					if (cursor.getString(2).equals(mPassword)) {
 						Log.d(TAG, "PASSWORD IS CORRECT");
-						Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+						Intent intent = new Intent(LoginActivity.this,
+								MenuActivity.class);
 						intent.putExtra("KEY_USER", mEmail);
 						startActivity(intent);
 					}
