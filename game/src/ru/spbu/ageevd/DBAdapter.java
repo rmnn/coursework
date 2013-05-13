@@ -14,6 +14,7 @@ public class DBAdapter {
 	public static final String KEY_PASSWORD = "password";
 	public static final String KEY_USER_RATING = "rating";
 	private static final String DATABASE_TABLE = "users";
+	private static final String KEY_NAME = "name";
 	private Context context;
 	private SQLiteDatabase database;
 	private DataBaseHelper dbHelper;
@@ -34,14 +35,14 @@ public class DBAdapter {
 
 	public long createUser(String userName, String userPassword) {
 		ContentValues initialValues = createContentValues(userName,
-				userPassword, 0);
+				userPassword, 0, "");
 
 		return database.insert(DATABASE_TABLE, null, initialValues);
 	}
 
 	public Cursor fetchAllUsers() {
 		return database.query(DATABASE_TABLE, new String[] { KEY_ROWID,
-				KEY_USER, KEY_PASSWORD, KEY_USER_RATING }, null, null, null,
+				KEY_USER, KEY_PASSWORD, KEY_USER_RATING, KEY_NAME }, null, null, null,
 				null, null);
 	}
 
@@ -74,6 +75,16 @@ public class DBAdapter {
 		}
 		return 0;
 	}
+	
+	public String getUserName(String userLogin) {
+		Cursor cursor = database.rawQuery(
+				"SELECT name FROM users WHERE TRIM(login) = '"
+						+ userLogin.trim() + "'", null);
+		if (cursor.moveToFirst()) {
+			return cursor.getString(0);
+		}
+		return null;
+	}
 
 	public boolean updateUserRating(String userName, int rating) {
 		ContentValues updateValues = createContentValue(rating);
@@ -88,19 +99,35 @@ public class DBAdapter {
 		}
 		return false;
 	}
+	
+	public void updateUserName(String userName, String name) {
+		ContentValues updateValues = createContentValue(name);
+		Log.d("ASD", "SQL RABOTAET " + userName + "   " + name);
+			Log.d("ASD", "ZASHLI SUDA");
+			database.update(DATABASE_TABLE, updateValues, KEY_ROWID + "="
+					+ Integer.toString(getRowId(userName)), null);
+			Log.d("ASD", "TUT NE DOLJNY BIT");
+	}
 
 	private ContentValues createContentValues(String userName,
-			String userPassword, int rating) {
+			String userPassword, int rating, String name) {
 		ContentValues values = new ContentValues();
 		values.put(KEY_USER, userName);
 		values.put(KEY_PASSWORD, userPassword);
 		values.put(KEY_USER_RATING, rating);
+		values.put(KEY_NAME, name);
 		return values;
 	}
 
 	private ContentValues createContentValue(int rating) {
 		ContentValues values = new ContentValues();
 		values.put(KEY_USER_RATING, rating);
+		return values;
+	}
+	
+	private ContentValues createContentValue(String name) {
+		ContentValues values = new ContentValues();
+		values.put(KEY_NAME, name);
 		return values;
 	}
 

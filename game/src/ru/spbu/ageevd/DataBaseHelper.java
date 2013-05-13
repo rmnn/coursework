@@ -13,7 +13,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 
 	private static final String DATABASE_CREATE = "create table users (_id integer primary key autoincrement, "
-			+ "login text not null, password text not null, rating integer not null);";
+			+ "login text not null, password text not null, rating integer not null, name text not null);";
 
 	public DataBaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
