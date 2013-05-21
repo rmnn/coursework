@@ -32,6 +32,7 @@ public class GameActivity extends Activity {
 	private static RadioButton rdButton0;
 	private static ImageView view;
 	private static String result;
+	private static final int MAX_ROUNDS = 10;
 	private static int answer = 0;
 	private static int numberOfRound = 0;
 	private static int trueAnswers = 0;
@@ -46,17 +47,13 @@ public class GameActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_game);
-		Log.d("ASD", "TUT ESHE OK");
 		rdGroup = (RadioGroup) findViewById(R.id.radioGroup1);
-		Log.d("ASD", "TUT ESHE OK");
 		rdButton1 = (RadioButton) findViewById(R.id.radio1);
 		rdButton2 = (RadioButton) findViewById(R.id.radio2);
 		rdButton3 = (RadioButton) findViewById(R.id.radio3);
 		rdButton0 = (RadioButton) findViewById(R.id.radio0);
 		view = (ImageView) findViewById(R.id.image);
-		Log.d("ASD", "TUT ESHE OK");
 		button = (Button) findViewById(R.id.buttonnext);
-		Log.d("ASD", "TUT ESHE OK");
 		getNextRound();
 
 		mHandler = new Handler() {
@@ -72,12 +69,19 @@ public class GameActivity extends Activity {
 				Log.d("ASD", "gameplayh: " + Integer.toString(answer)
 						+ ", button : " + Integer.toString(id));
 				Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
-				if (numberOfRound == 5) {
+				if (numberOfRound == MAX_ROUNDS) {
 					Intent intent = new Intent(GameActivity.this,
 							ResultActivity.class);
 					intent.putExtra("KEY_RESULT", trueAnswers);
 					intent.putExtra("KEY_USER", getIntent().getExtras()
 							.getString("KEY_USER"));
+					intent.putExtra("KEY_PASSWORD", getIntent().getExtras()
+							.getString("KEY_PASSWORD"));
+					intent.putExtra("KEY_ISCHECKED", getIntent().getExtras()
+							.getBoolean("KEY_ISCHECKED"));
+					Log.d("ASD", "GAME ACTIVITY");
+					Log.d("ASD", Boolean.toString(getIntent().getExtras()
+							.getBoolean("KEY_ISCHECKED")));
 					startActivity(intent);
 				}
 				getNextRound();

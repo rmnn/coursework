@@ -36,24 +36,6 @@
             android:text="Best players"
              > </Button>
         
-        <Button
-            android:id="@+id/button2"
-            android:textColor="#2faefe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="About"
-             > </Button>
-        
-        
-        <Button
-            android:id="@+id/button3"
-            android:textColor="#2faefe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Exit"
-             > </Button>
 
         <TextView
             android:id="@+id/rating"

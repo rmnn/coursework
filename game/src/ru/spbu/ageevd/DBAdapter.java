@@ -149,7 +149,7 @@ public class DBAdapter {
 	}
 
 	public Cursor getTopUsers() {
-		return database.rawQuery("SELECT * FROM users;",
+		return database.rawQuery("SELECT * FROM users order by rating",
 				null);
 		
 

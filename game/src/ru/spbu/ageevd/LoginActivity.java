@@ -2,6 +2,7 @@ package ru.spbu.ageevd;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -49,6 +51,7 @@ public class LoginActivity extends Activity {
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
+	public static CheckBox checkBox;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class LoginActivity extends Activity {
 
 		setContentView(R.layout.activity_login);
 		Log.d(TAG, "START ACTIVITY LOGIN");
+		checkBox = (CheckBox) findViewById(R.id.checkbox);
 
 		// Set up the login form.
 		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
@@ -213,6 +217,7 @@ public class LoginActivity extends Activity {
 	 */
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
+		@SuppressLint("NewApi")
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			db.open();
@@ -226,6 +231,8 @@ public class LoginActivity extends Activity {
 					Intent intent = new Intent(LoginActivity.this,
 							MenuActivity.class);
 					intent.putExtra("KEY_USER", mEmail);
+					intent.putExtra("KEY_PASSWORD", mPassword);
+					intent.putExtra("KEY_ISCHECKED", LoginActivity.checkBox.isChecked());
 					startActivity(intent);
 				} else {
 					Log.d(TAG, "USER EXIST");
@@ -234,6 +241,9 @@ public class LoginActivity extends Activity {
 						Intent intent = new Intent(LoginActivity.this,
 								MenuActivity.class);
 						intent.putExtra("KEY_USER", mEmail);
+						intent.putExtra("KEY_PASSWORD", mPassword);
+						intent.putExtra("KEY_ISCHECKED", LoginActivity.checkBox.isChecked());
+						
 						startActivity(intent);
 					}
 				}
